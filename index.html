@@ -1,250 +1,947 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STRAP — Sports Tape</title>
-  <style>
-    :root{
-      --bg:#0b0d10;
-      --card:#12161b;
-      --muted:#9aa4af;
-      --text:#f5f7fa;
-      --accent:#d7ff3f;
-      --accent2:#8fd400;
-      --line:#222931;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:Inter,Arial,Helvetica,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.5;
-    }
-    a{text-decoration:none;color:inherit}
-    .nav{
-      position:sticky;top:0;z-index:10;
-      display:flex;justify-content:space-between;align-items:center;
-      padding:18px 7%;
-      background:rgba(11,13,16,.88);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--line);
-    }
-    .logo{font-weight:900;letter-spacing:3px;font-size:1.35rem}
-    .logo span{color:var(--accent)}
-    .navlinks{display:flex;gap:26px;color:#c5ccd4;font-size:.92rem}
-    .navlinks a:hover{color:var(--accent)}
-    .hero{
-      min-height:78vh;
-      display:grid;place-items:center;
-      text-align:center;
-      padding:90px 7%;
-      background:
-        radial-gradient(circle at 20% 20%,rgba(215,255,63,.12),transparent 30%),
-        radial-gradient(circle at 80% 60%,rgba(215,255,63,.08),transparent 28%);
-    }
-    .tag{
-      display:inline-block;
-      padding:7px 13px;
-      border:1px solid #41520d;
-      border-radius:999px;
-      color:var(--accent);
-      font-size:.78rem;
-      font-weight:800;
-      letter-spacing:1px;
-      margin-bottom:18px;
-    }
-    h1{font-size:clamp(3.3rem,8vw,7rem);line-height:.9;letter-spacing:-4px}
-    h1 span{color:var(--accent)}
-    .hero p{max-width:700px;margin:25px auto;color:var(--muted);font-size:1.05rem}
-    .buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-    .btn{
-      padding:13px 20px;border-radius:10px;font-weight:800;
-      border:1px solid var(--line);cursor:pointer;
-      transition:.2s;
-    }
-    .primary{background:var(--accent);color:#10130a;border-color:var(--accent)}
-    .primary:hover{transform:translateY(-2px);background:#e5ff75}
-    .secondary{background:#12161b}
-    .secondary:hover{border-color:#53616e}
-    section{padding:85px 7%}
-    .section-head{max-width:700px;margin-bottom:35px}
-    .section-head h2{font-size:2.4rem;margin-bottom:8px}
-    .section-head p{color:var(--muted)}
-    .grid{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:18px
-    }
-    .card{
-      background:var(--card);border:1px solid var(--line);border-radius:18px;padding:25px;
-      transition:.25s;
-    }
-    .card:hover{transform:translateY(-5px);border-color:#3b4650}
-    .icon{
-      width:45px;height:45px;border-radius:12px;display:grid;place-items:center;
-      background:rgba(215,255,63,.12);color:var(--accent);font-size:1.4rem;margin-bottom:18px
-    }
-    .card h3{margin-bottom:8px}
-    .card p{color:var(--muted);font-size:.95rem}
-    .types .card{min-height:190px}
-    .product{
-      display:flex;flex-direction:column;gap:12px;
-    }
-    .tape{
-      height:150px;border-radius:14px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg,#ece7db,#c9c0ad);
-      color:#181713;font-size:2.3rem;font-weight:900;letter-spacing:2px;
-      overflow:hidden;
-      position:relative;
-    }
-    .tape:before{
-      content:"";
-      position:absolute;width:180px;height:180px;border-radius:50%;
-      border:22px solid rgba(0,0,0,.13);
-    }
-    .tape.black{background:linear-gradient(135deg,#24272b,#08090a);color:white}
-    .tape.blue{background:linear-gradient(135deg,#2c78ff,#163d9d);color:white}
-    .price{font-size:1.25rem;font-weight:900}
-    .buy{
-      width:100%;padding:12px;border:0;border-radius:9px;
-      background:var(--accent);font-weight:900;cursor:pointer
-    }
-    .buy:hover{background:#e5ff75}
-    .banner{
-      margin-top:30px;
-      background:var(--accent);color:#0b0d10;border-radius:22px;
-      padding:35px;display:flex;justify-content:space-between;align-items:center;gap:20px
-    }
-    .banner h3{font-size:1.8rem}
-    .darkbtn{background:#0b0d10;color:white;border:none;padding:12px 18px;border-radius:9px;font-weight:800;cursor:pointer}
-    .steps{counter-reset:step}
-    .step{display:flex;gap:18px;align-items:flex-start}
-    .num{
-      flex:none;width:42px;height:42px;border-radius:50%;background:#1b2127;
-      display:grid;place-items:center;color:var(--accent);font-weight:900
-    }
-    footer{border-top:1px solid var(--line);padding:30px 7%;display:flex;justify-content:space-between;color:var(--muted);font-size:.85rem}
-    @media(max-width:800px){
-      .navlinks{display:none}
-      .grid{grid-template-columns:1fr}
-      section{padding:65px 6%}
-      .banner{flex-direction:column;align-items:flex-start}
-      h1{letter-spacing:-2px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STRAP — Sports Tape</title>
+
+<style>
+:root{
+  --bg:#0b0d10;
+  --card:#12161b;
+  --muted:#9aa4af;
+  --text:#f5f7fa;
+  --accent:#d7ff3f;
+  --line:#222931;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+
+a{text-decoration:none;color:inherit}
+
+.nav{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 7%;
+  background:rgba(11,13,16,.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+
+.logo{
+  font-weight:900;
+  letter-spacing:3px;
+  font-size:1.35rem;
+}
+
+.logo span{color:var(--accent)}
+
+.navlinks{
+  display:flex;
+  gap:26px;
+  color:#c5ccd4;
+  font-size:.92rem;
+}
+
+.navlinks a:hover{color:var(--accent)}
+
+.cart-button{
+  background:var(--accent);
+  color:#10130a;
+  border:0;
+  padding:10px 15px;
+  border-radius:9px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.hero{
+  min-height:78vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:90px 7%;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(215,255,63,.12),transparent 30%),
+    radial-gradient(circle at 80% 60%,rgba(215,255,63,.08),transparent 28%);
+}
+
+.tag{
+  display:inline-block;
+  padding:7px 13px;
+  border:1px solid #41520d;
+  border-radius:999px;
+  color:var(--accent);
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:clamp(3.3rem,8vw,7rem);
+  line-height:.9;
+  letter-spacing:-4px;
+}
+
+h1 span{color:var(--accent)}
+
+.hero p{
+  max-width:700px;
+  margin:25px auto;
+  color:var(--muted);
+  font-size:1.05rem;
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:13px 20px;
+  border-radius:10px;
+  font-weight:800;
+  border:1px solid var(--line);
+  cursor:pointer;
+}
+
+.primary{
+  background:var(--accent);
+  color:#10130a;
+  border-color:var(--accent);
+}
+
+.secondary{background:#12161b}
+
+section{padding:85px 7%}
+
+.section-head{
+  max-width:700px;
+  margin-bottom:35px;
+}
+
+.section-head h2{
+  font-size:2.4rem;
+  margin-bottom:8px;
+}
+
+.section-head p{color:var(--muted)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:25px;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:#3b4650;
+}
+
+.icon{
+  width:45px;
+  height:45px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:rgba(215,255,63,.12);
+  color:var(--accent);
+  font-size:1.4rem;
+  margin-bottom:18px;
+}
+
+.card h3{margin-bottom:8px}
+
+.card p{
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+/* PRODUCT CARDS */
+
+.product{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.product-image{
+  height:190px;
+  border-radius:14px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+  background:#20242a;
+}
+
+/* tape roll */
+
+.roll{
+  width:125px;
+  height:125px;
+  border-radius:50%;
+  background:var(--tape-color);
+  border:18px solid rgba(255,255,255,.13);
+  box-shadow:
+    0 12px 25px rgba(0,0,0,.45),
+    inset 0 0 0 8px rgba(0,0,0,.12);
+  position:relative;
+}
+
+.roll:after{
+  content:"";
+  position:absolute;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#111;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:inset 0 0 0 8px #555;
+}
+
+.kinesiology{
+  --tape-color:#111;
+  background:linear-gradient(135deg,#24272b,#08090a);
+}
+
+.athletic{
+  --tape-color:#eee;
+  background:linear-gradient(135deg,#f4f4f4,#c8c8c8);
+}
+
+.prewrap{
+  --tape-color:#5d91ff;
+  background:linear-gradient(135deg,#233d78,#111b35);
+}
+
+.color-options{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:3px;
+}
+
+.color-option{
+  border:1px solid #3a434c;
+  background:#181d22;
+  color:white;
+  padding:7px 10px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:.8rem;
+}
+
+.color-option:hover,
+.color-option.selected{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+.price{
+  font-size:1.25rem;
+  font-weight:900;
+}
+
+.buy{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:var(--accent);
+  font-weight:900;
+  cursor:pointer;
+}
+
+.buy:hover{background:#e5ff75}
+
+.banner{
+  margin-top:30px;
+  background:var(--accent);
+  color:#0b0d10;
+  border-radius:22px;
+  padding:35px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.banner h3{font-size:1.8rem}
+
+.darkbtn{
+  background:#0b0d10;
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:9px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* CART */
+
+.cart-panel{
+  position:fixed;
+  right:-420px;
+  top:0;
+  width:400px;
+  max-width:95%;
+  height:100vh;
+  background:#101419;
+  border-left:1px solid var(--line);
+  z-index:100;
+  padding:25px;
+  transition:.3s;
+  overflow-y:auto;
+}
+
+.cart-panel.open{right:0}
+
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.close{
+  background:none;
+  color:white;
+  border:0;
+  font-size:1.5rem;
+  cursor:pointer;
+}
+
+.cart-item{
+  border-bottom:1px solid var(--line);
+  padding:15px 0;
+}
+
+.cart-item h4{margin-bottom:5px}
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:8px;
+}
+
+.quantity button{
+  width:28px;
+  height:28px;
+  border:1px solid #3b444c;
+  background:#181d22;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.remove{
+  color:#ff7070;
+  background:none;
+  border:0;
+  cursor:pointer;
+  margin-left:10px;
+}
+
+.cart-total{
+  font-size:1.3rem;
+  font-weight:900;
+  margin:25px 0;
+}
+
+.checkout{
+  width:100%;
+  padding:14px;
+  background:var(--accent);
+  border:0;
+  border-radius:10px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+/* CHECKOUT */
+
+.checkout-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:200;
+  place-items:center;
+  padding:20px;
+}
+
+.checkout-box{
+  width:500px;
+  max-width:100%;
+  background:#12161b;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:30px;
+}
+
+.checkout-box input{
+  width:100%;
+  padding:13px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #343c44;
+  background:#0b0d10;
+  color:white;
+}
+
+.place-order{
+  width:100%;
+  padding:13px;
+  margin-top:15px;
+  background:var(--accent);
+  border:0;
+  border-radius:9px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.steps{counter-reset:step}
+
+.step{
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+}
+
+.num{
+  flex:none;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#1b2127;
+  display:grid;
+  place-items:center;
+  color:var(--accent);
+  font-weight:900;
+}
+
+footer{
+  border-top:1px solid var(--line);
+  padding:30px 7%;
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+@media(max-width:800px){
+  .navlinks{display:none}
+  .grid{grid-template-columns:1fr}
+  section{padding:65px 6%}
+  .banner{flex-direction:column;align-items:flex-start}
+  h1{letter-spacing:-2px}
+  .cart-panel{width:95%}
+}
+</style>
 </head>
+
 <body>
-  <nav class="nav">
-    <a class="logo" href="#">STR<span>AP</span></a>
-    <div class="navlinks">
-      <a href="#why">Why Tape</a>
-      <a href="#types">Types</a>
-      <a href="#shop">Shop</a>
-      <a href="#how">How It Works</a>
-    </div>
-  </nav>
 
-  <header class="hero">
+<nav class="nav">
+  <a class="logo" href="#">STR<span>AP</span></a>
+
+  <div class="navlinks">
+    <a href="#why">Why Tape</a>
+    <a href="#types">Types</a>
+    <a href="#shop">Shop</a>
+    <a href="#how">How It Works</a>
+  </div>
+
+  <button class="cart-button" onclick="openCart()">
+    🛒 CART (<span id="cartCount">0</span>)
+  </button>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="tag">MADE FOR MOVEMENT</div>
+
+    <h1>STAY <span>LOCKED</span> IN.</h1>
+
+    <p>
+      Sports tape built to support active movement, training, and competition.
+      Secure feel, strong hold, zero nonsense.
+    </p>
+
+    <div class="buttons">
+      <a class="btn primary" href="#shop">SHOP TAPE</a>
+      <a class="btn secondary" href="#why">LEARN MORE</a>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+
+  <div class="section-head">
+    <h2>Why athletes use sports tape</h2>
+    <p>
+      Tape can provide support, help secure equipment or dressings,
+      and give athletes a more confident feel during activity.
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">↗</div>
+      <h3>Support</h3>
+      <p>Useful for targeted support around joints and muscles during training or sport.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">▣</div>
+      <h3>Grip & Hold</h3>
+      <p>Helps keep wraps, pads, and athletic equipment in place.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Built to Move</h3>
+      <p>Designed around active movement so you can focus on your game.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="types">
+
+  <div class="section-head">
+    <h2>Pick your tape</h2>
+    <p>
+      Different sports, different jobs. Apparently humanity needed
+      several types of tape. 😭
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">🏀</div>
+      <h3>Kinesiology Tape</h3>
+      <p>Elastic tape commonly used for movement-focused support.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💪</div>
+      <h3>Athletic Tape</h3>
+      <p>Firm, non-elastic tape often used for rigid support.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🩹</div>
+      <h3>Pre-Wrap</h3>
+      <p>Soft underlayer placed beneath athletic tape.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="shop">
+
+  <div class="section-head">
+    <h2>STRAP essentials</h2>
+    <p>Choose your tape, choose your color, add it to your kit.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- KINESIOLOGY -->
+
+    <div class="card product">
+
+      <div class="product-image kinesiology">
+        <div class="roll"></div>
+      </div>
+
+      <h3>Flex Kinesiology Tape</h3>
+
+      <p>Stretchy support designed for active movement.</p>
+
+      <div class="color-options">
+        <button class="color-option selected" onclick="selectColor(this,'Black')">🖤 Black</button>
+        <button class="color-option" onclick="selectColor(this,'White')">🤍 White</button>
+        <button class="color-option" onclick="selectColor(this,'Multi-Color')">🌈 Multi-Color</button>
+      </div>
+
+      <div class="price">$12.99</div>
+
+      <button class="buy"
+        onclick="addToCart('Flex Kinesiology Tape','$12.99')">
+        ADD TO KIT
+      </button>
+
+    </div>
+
+    <!-- ATHLETIC -->
+
+    <div class="card product">
+
+      <div class="product-image athletic">
+        <div class="roll"></div>
+      </div>
+
+      <h3>Pro Athletic Tape</h3>
+
+      <p>Strong, rigid support for training and competition.</p>
+
+      <div class="color-options">
+        <button class="color-option selected" onclick="selectColor(this,'White')">🤍 White</button>
+        <button class="color-option" onclick="selectColor(this,'Black')">🖤 Black</button>
+        <button class="color-option" onclick="selectColor(this,'Multi-Color')">🌈 Multi-Color</button>
+      </div>
+
+      <div class="price">$9.99</div>
+
+      <button class="buy"
+        onclick="addToCart('Pro Athletic Tape','$9.99')">
+        ADD TO KIT
+      </button>
+
+    </div>
+
+    <!-- PRE-WRAP -->
+
+    <div class="card product">
+
+      <div class="product-image prewrap">
+        <div class="roll"></div>
+      </div>
+
+      <h3>Prep Pre-Wrap</h3>
+
+      <p>Lightweight underlayer for comfortable taping.</p>
+
+      <div class="color-options">
+        <button class="color-option selected" onclick="selectColor(this,'Blue')">🔵 Blue</button>
+        <button class="color-option" onclick="selectColor(this,'Black')">⚫ Black</button>
+        <button class="color-option" onclick="selectColor(this,'Multi-Color')">🌈 Multi-Color</button>
+      </div>
+
+      <div class="price">$7.99</div>
+
+      <button class="buy"
+        onclick="addToCart('Prep Pre-Wrap','$7.99')">
+        ADD TO KIT
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="banner">
+
     <div>
-      <div class="tag">MADE FOR MOVEMENT</div>
-      <h1>STAY <span>LOCKED</span> IN.</h1>
-      <p>Sports tape built to support active movement, training, and competition. Secure feel, strong hold, zero nonsense.</p>
-      <div class="buttons">
-        <a class="btn primary" href="#shop">SHOP TAPE</a>
-        <a class="btn secondary" href="#why">LEARN MORE</a>
+      <h3>Built for the next play.</h3>
+      <p>Train smart. Stay supported. Keep moving.</p>
+    </div>
+
+    <button class="darkbtn" onclick="openCart()">
+      VIEW YOUR KIT
+    </button>
+
+  </div>
+
+</section>
+
+<section id="how">
+
+  <div class="section-head">
+    <h2>How to use sports tape</h2>
+    <p>
+      Application depends on the tape and purpose.
+      For injury treatment, follow guidance from a qualified professional.
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <div class="card step">
+      <div class="num">1</div>
+      <div>
+        <h3>Clean & dry</h3>
+        <p>Apply tape to clean, dry skin and avoid irritated areas.</p>
       </div>
     </div>
-  </header>
 
-  <section id="why">
-    <div class="section-head">
-      <h2>Why athletes use sports tape</h2>
-      <p>Tape can provide support, help secure equipment or dressings, and give athletes a more confident feel during activity.</p>
-    </div>
-    <div class="grid">
-      <div class="card"><div class="icon">↗</div><h3>Support</h3><p>Useful for targeted support around joints and muscles during training or sport.</p></div>
-      <div class="card"><div class="icon">▣</div><h3>Grip & Hold</h3><p>Helps keep wraps, pads, and other athletic equipment in place when things get intense.</p></div>
-      <div class="card"><div class="icon">⚡</div><h3>Built to Move</h3><p>Designed around active movement so you can focus on your game instead of your tape.</p></div>
-    </div>
-  </section>
-
-  <section id="types" class="types">
-    <div class="section-head">
-      <h2>Pick your tape</h2>
-      <p>Different sports, different jobs. Humanity somehow made several types of tape because apparently one roll was not enough.</p>
-    </div>
-    <div class="grid">
-      <div class="card"><div class="icon">🏀</div><h3>Kinesiology Tape</h3><p>Elastic tape commonly used for movement-focused support and body awareness.</p></div>
-      <div class="card"><div class="icon">💪</div><h3>Athletic Tape</h3><p>Firm, non-elastic tape often used for rigid support and securing wraps.</p></div>
-      <div class="card"><div class="icon">🩹</div><h3>Pre-Wrap</h3><p>Soft underlayer placed beneath athletic tape to make removal and application more comfortable.</p></div>
-    </div>
-  </section>
-
-  <section id="shop">
-    <div class="section-head">
-      <h2>STRAP essentials</h2>
-      <p>Simple gear. Serious sessions.</p>
-    </div>
-    <div class="grid">
-      <div class="card product">
-        <div class="tape">PRO</div>
-        <h3>Pro Athletic Tape</h3>
-        <p>Strong, rigid support for training and competition.</p>
-        <div class="price">$9.99</div>
-        <button class="buy" onclick="addToCart('Pro Athletic Tape')">ADD TO KIT</button>
-      </div>
-      <div class="card product">
-        <div class="tape black">FLEX</div>
-        <h3>Flex Kinesiology Tape</h3>
-        <p>Stretchy support designed for active movement.</p>
-        <div class="price">$12.99</div>
-        <button class="buy" onclick="addToCart('Flex Kinesiology Tape')">ADD TO KIT</button>
-      </div>
-      <div class="card product">
-        <div class="tape blue">PREP</div>
-        <h3>Prep Pre-Wrap</h3>
-        <p>Lightweight underlayer for comfortable taping.</p>
-        <div class="price">$7.99</div>
-        <button class="buy" onclick="addToCart('Prep Pre-Wrap')">ADD TO KIT</button>
+    <div class="card step">
+      <div class="num">2</div>
+      <div>
+        <h3>Apply carefully</h3>
+        <p>Use the technique appropriate for the tape and area.</p>
       </div>
     </div>
-    <div class="banner">
-      <div><h3>Built for the next play.</h3><p>Train smart. Stay supported. Keep moving.</p></div>
-      <button class="darkbtn" onclick="showKit()">VIEW YOUR KIT</button>
-    </div>
-  </section>
 
-  <section id="how">
-    <div class="section-head">
-      <h2>How to use sports tape</h2>
-      <p>Application depends on the tape and purpose. For injury treatment, follow guidance from a qualified professional.</p>
+    <div class="card step">
+      <div class="num">3</div>
+      <div>
+        <h3>Check your skin</h3>
+        <p>Stop using the tape if you develop pain or skin irritation.</p>
+      </div>
     </div>
-    <div class="grid">
-      <div class="card step"><div class="num">1</div><div><h3>Clean & dry</h3><p>Apply tape to clean, dry skin and avoid irritated areas.</p></div></div>
-      <div class="card step"><div class="num">2</div><div><h3>Apply carefully</h3><p>Use the technique appropriate for the tape and the area being supported.</p></div></div>
-      <div class="card step"><div class="num">3</div><div><h3>Check your skin</h3><p>Stop using the tape if you develop pain, numbness, swelling, or skin irritation.</p></div></div>
+
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 STRAP Sports Tape</div>
+  <div>MOVE. SUPPORT. REPEAT.</div>
+</footer>
+
+
+<!-- CART -->
+
+<div class="cart-panel" id="cartPanel">
+
+  <div class="cart-header">
+    <h2>Your Kit 🛒</h2>
+    <button class="close" onclick="closeCart()">×</button>
+  </div>
+
+  <div id="cartItems"></div>
+
+  <div class="cart-total">
+    Total: $<span id="cartTotal">0.00</span>
+  </div>
+
+  <button class="checkout" onclick="openCheckout()">
+    CHECKOUT
+  </button>
+
+</div>
+
+
+<!-- CHECKOUT MODAL -->
+
+<div class="checkout-modal" id="checkoutModal">
+
+  <div class="checkout-box">
+
+    <div class="cart-header">
+      <h2>Checkout</h2>
+      <button class="close" onclick="closeCheckout()">×</button>
     </div>
-  </section>
 
-  <footer>
-    <div>© 2026 STRAP Sports Tape</div>
-    <div>MOVE. SUPPORT. REPEAT.</div>
-  </footer>
+    <input type="text" placeholder="Full Name">
+    <input type="email" placeholder="Email">
+    <input type="text" placeholder="Shipping Address">
+    <input type="text" placeholder="City">
 
-  <script>
-    const kit = [];
-    function addToCart(item){
-      kit.push(item);
-      alert(item + " added to your kit. 🏀");
-    }
-    function showKit(){
-      if(!kit.length){
-        alert("Your kit is empty. Humanity survives another day.");
-        return;
-      }
-      alert("Your STRAP kit:\\n\\n" + kit.map((x,i)=>(i+1)+". "+x).join("\\n"));
-    }
-  </script>
+    <p style="color:#9aa4af;margin-top:12px;font-size:.85rem;">
+      Demo checkout only. No real payment is processed.
+    </p>
+
+    <button class="place-order" onclick="placeOrder()">
+      PLACE ORDER
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+let cart = [];
+
+let selectedColors = {
+  "Flex Kinesiology Tape":"Black",
+  "Pro Athletic Tape":"White",
+  "Prep Pre-Wrap":"Blue"
+};
+
+function selectColor(button,color){
+
+  const parent = button.parentElement;
+
+  parent.querySelectorAll(".color-option")
+    .forEach(btn => btn.classList.remove("selected"));
+
+  button.classList.add("selected");
+
+  const product = parent.parentElement
+    .querySelector("h3").innerText;
+
+  selectedColors[product] = color;
+}
+
+function addToCart(name,price){
+
+  const numericPrice = parseFloat(price.replace("$",""));
+
+  const color = selectedColors[name] || "Standard";
+
+  const existing = cart.find(item =>
+    item.name === name && item.color === color
+  );
+
+  if(existing){
+    existing.quantity++;
+  }else{
+    cart.push({
+      name:name,
+      price:numericPrice,
+      color:color,
+      quantity:1
+    });
+  }
+
+  updateCart();
+
+  alert(name + " (" + color + ") added to your kit 🏀");
+}
+
+function updateCart(){
+
+  const container = document.getElementById("cartItems");
+
+  container.innerHTML = "";
+
+  let total = 0;
+  let count = 0;
+
+  cart.forEach((item,index)=>{
+
+    total += item.price * item.quantity;
+    count += item.quantity;
+
+    container.innerHTML += `
+      <div class="cart-item">
+
+        <h4>${item.name}</h4>
+
+        <p>${item.color} · $${item.price.toFixed(2)}</p>
+
+        <div class="quantity">
+
+          <button onclick="changeQuantity(${index},-1)">−</button>
+
+          <span>${item.quantity}</span>
+
+          <button onclick="changeQuantity(${index},1)">+</button>
+
+          <button class="remove"
+            onclick="removeItem(${index})">
+            Remove
+          </button>
+
+        </div>
+
+      </div>
+    `;
+  });
+
+  document.getElementById("cartCount").innerText = count;
+
+  document.getElementById("cartTotal").innerText =
+    total.toFixed(2);
+}
+
+function changeQuantity(index,amount){
+
+  cart[index].quantity += amount;
+
+  if(cart[index].quantity <= 0){
+    cart.splice(index,1);
+  }
+
+  updateCart();
+}
+
+function removeItem(index){
+
+  cart.splice(index,1);
+
+  updateCart();
+}
+
+function openCart(){
+
+  document.getElementById("cartPanel")
+    .classList.add("open");
+
+  updateCart();
+}
+
+function closeCart(){
+
+  document.getElementById("cartPanel")
+    .classList.remove("open");
+}
+
+function openCheckout(){
+
+  if(cart.length === 0){
+    alert("Your kit is empty. Humanity survives another day. 😭");
+    return;
+  }
+
+  document.getElementById("checkoutModal")
+    .style.display = "grid";
+}
+
+function closeCheckout(){
+
+  document.getElementById("checkoutModal")
+    .style.display = "none";
+}
+
+function placeOrder(){
+
+  alert(
+    "Order placed! 🏀🔥\n\n" +
+    "This is a demo checkout, so no real payment was processed."
+  );
+
+  cart = [];
+
+  updateCart();
+
+  closeCheckout();
+
+  closeCart();
+}
+
+updateCart();
+
+</script>
+
 </body>
 </html>
+```
+
